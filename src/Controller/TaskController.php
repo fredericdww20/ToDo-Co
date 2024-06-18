@@ -57,20 +57,14 @@ class TaskController extends AbstractController
 
 
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
-    public function editAction(Task $task, Request $request, EntityManagerInterface $em, Security $security): Response
+    public function editAction(Task $task, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = $security->getUser();
-        if ($task->getUser() !== $user) {
-            $this->addFlash('error', 'Vous ne pouvez pas modifier cette tâche.');
-            return $this->redirectToRoute('task_list');
-        }
-
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $entityManager->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
 
