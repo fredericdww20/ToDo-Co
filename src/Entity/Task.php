@@ -28,10 +28,6 @@ class Task
     #[ORM\Column(type: "boolean")]
     private $isDone;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -87,18 +83,6 @@ class Task
     public function toggle(bool $flag): self
     {
         $this->isDone = $flag;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
