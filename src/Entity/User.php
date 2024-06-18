@@ -8,9 +8,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ORM\Table(name: "user")]
 #[ORM\Entity]
-#[UniqueEntity(fields: ["email"], message: "Cette adresse email est déjà utilisée.")]
+#[ORM\Table(name: "user")]
+#[UniqueEntity(fields: ["username"], message: "Ce nom d'utilisateur est déjà utilisé.")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -83,7 +83,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
-        return $this->email;
+        return $this->username;
     }
 
     public function eraseCredentials()
