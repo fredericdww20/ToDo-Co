@@ -25,7 +25,7 @@ class TaskController extends AbstractController
 
 
     #[Route('/tasks/create', name: 'task_create')]
-    public function createAction(Request $request, EntityManagerInterface $em, Security $security): Response
+    public function createAction(Request $request, EntityManagerInterface $entityManager): Response
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
@@ -33,17 +33,10 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Attacher la tâche à l'utilisateur authentifié
-            $user = $security->getUser();
-            if (!$user) {
-                throw new AccessDeniedException('Vous devez être connecté pour créer une tâche.');
-            }
-            $task->setUser($user);
+            $entityManager->persist($task);
+            $entityManager->flush();
 
-            $em->persist($task);
-            $em->flush();
-
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+            $this->addFlash('success', 'La tâche a bien été ajoutée.');
 
             return $this->redirectToRoute('task_list');
         }
