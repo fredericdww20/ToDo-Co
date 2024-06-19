@@ -15,6 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
+    
 
     #[Route('/users', name: 'user_list')]
     public function listAction(EntityManagerInterface $entityManager): Response
@@ -32,26 +33,26 @@ class UserController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hashedPassword = $passwordHasher->hashPassword(
-                $user,
-                $user->getPassword()
-            );
-            $user->setPassword($hashedPassword);
+            $password = $passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setPassword($password);
+
+            // Convertir le rôle sélectionné en tableau
+            $role = $form->get('roles')->getData();
+            $user->setRoles([$role]);
 
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', "L'utilisateur a bien été ajouté.");
+            $this->addFlash('success', 'L\'utilisateur a bien été ajouté.');
 
             return $this->redirectToRoute('user_list');
         }
 
-        return $this->render('user/create.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render('user/create.html.twig', ['form' => $form->createView()]);
     }
 
     
