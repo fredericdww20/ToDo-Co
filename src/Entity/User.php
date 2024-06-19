@@ -4,13 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name: "user")]
-#[UniqueEntity(fields: ["username"], message: "Ce nom d'utilisateur est déjà utilisé.")]
+#[UniqueEntity(fields: ["email"], message: "Cette adresse email est déjà utilisée.")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -27,8 +27,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: "string", length: 60, unique: true)]
     #[Assert\NotBlank(message: "Vous devez saisir une adresse email.")]
-    #[Assert\Email(message: "Le format de l'adresse n'est pas correct.")]
+    #[Assert\Email(message: "Le format de l'adresse n'est pas correcte.")]
     private $email;
+
+    #[ORM\Column(type: "json")]
+    private $roles = [];
 
     public function getId(): ?int
     {
@@ -45,11 +48,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->username = $username;
 
         return $this;
-    }
-
-    public function getSalt(): ?string
-    {
-        return null;
     }
 
     public function getPassword(): ?string
@@ -78,15 +76,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getSalt(): ?string
+    {
+        return null;
     }
 
     public function getUserIdentifier(): string
     {
-        return $this->username;
+        return (string) $this->email;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
+        // If you store any temporary, sensitive data on the user, clear it here
     }
 }
