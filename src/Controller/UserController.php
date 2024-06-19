@@ -31,6 +31,8 @@ class UserController extends AbstractController
     #[Route('/users/create', name: 'user_create')]
     public function createAction(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
@@ -39,10 +41,6 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
-
-            // Convertir le rôle sélectionné en tableau
-            $role = $form->get('roles')->getData();
-            $user->setRoles([$role]);
 
             $em->persist($user);
             $em->flush();
@@ -57,22 +55,22 @@ class UserController extends AbstractController
 
     
     #[Route('/users/{id}/edit', name: 'user_edit')]
-    public function editAction(User $user, Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    public function editAction(User $user, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hashedPassword = $passwordHasher->hashPassword(
-                $user,
-                $user->getPassword()
-            );
-            $user->setPassword($hashedPassword);
+            if ($form->get('password')->getData()) {
+                $password = $passwordHasher->hashPassword($user, $user->getPassword());
+                $user->setPassword($password);
+            }
 
-            $entityManager->flush();
+            $em->flush();
 
-            $this->addFlash('success', "L'utilisateur a bien été modifié");
+            $this->addFlash('success', 'L\'utilisateur a bien été modifié.');
 
             return $this->redirectToRoute('user_list');
         }
@@ -82,4 +80,5 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+
 }

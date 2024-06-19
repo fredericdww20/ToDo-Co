@@ -27,13 +27,13 @@ class UserType extends AbstractType
             ])
             ->add('email', EmailType::class, ['label' => 'Adresse email'])
             ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Utilisateur' => 'ROLE_USER',
-                    'Administrateur' => 'ROLE_ADMIN',
-                ],
-                'multiple' => true,  // Utilisez `multiple` à `true` mais traitez-le correctement comme un tableau
-                'expanded' => true,
                 'label' => 'Rôle',
+                'multiple' => true,
+                'expanded' => true,
+                'choices' => [
+                    'Utilisateur' => "ROLE_USER",
+                    'Administrateur' => "ROLE_ADMIN"
+                ],
             ]);
         ;
     }
