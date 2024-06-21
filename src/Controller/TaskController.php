@@ -37,7 +37,7 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $user = $security->getUser();
             if (!$user) {
                 throw new AccessDeniedException('Vous devez être connecté pour créer une tâche.');
@@ -112,4 +112,3 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 }
-
