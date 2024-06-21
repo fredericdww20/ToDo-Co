@@ -26,4 +26,5 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         // Redirect to homepage
         return new RedirectResponse($this->router->generate('homepage'));
     }
+    
 }
