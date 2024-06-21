@@ -2,15 +2,17 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name: "user")]
-#[UniqueEntity(fields: ["email"], message: "Cette adresse email est déjà utilisée.")]
+#[UniqueEntity("email")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -32,6 +34,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: "json")]
     private $roles = [];
+
+    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: "user", cascade: ["remove"])]
+    private $tasks;
+
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,17 +101,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return null;
     }
 
+    public function eraseCredentials()
+    {
+    }
+
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return $this->username; // Ou $this->email selon ce que vous utilisez comme identifiant unique
     }
 
-    public function eraseCredentials(): void
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
     {
+        return $this->tasks;
     }
 
-    public function __toString()
+    public function addTask(Task $task): self
     {
-        return $this->username;
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->removeElement($task)) {
+            if ($task->getUser() === $this) {
+                $task->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
