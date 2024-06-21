@@ -18,36 +18,30 @@ class TaskController extends AbstractController
 {
 
     #[Route('/tasks', name: 'task_list')]
-    public function listAction(EntityManagerInterface $entityManager): Response
+    public function listAction(EntityManagerInterface $em): Response
     {
-        $tasks = $entityManager->getRepository(Task::class)->findAll();
+        $tasks = $em->getRepository(Task::class)->findAll();
 
-        return $this->render('task/list.html.twig', [
-            'tasks' => $tasks,
-        ]);
+        return $this->render('task/list.html.twig', ['tasks' => $tasks]);
     }
 
-
     #[Route('/tasks/create', name: 'task_create')]
-    public function createAction(Request $request, EntityManagerInterface $em, Security $security): Response
+    public function createAction(Request $request, EntityManagerInterface $em): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $user = $security->getUser();
-            if (!$user) {
-                throw new AccessDeniedException('Vous devez être connecté pour créer une tâche.');
-            }
-            $task->setUser($user);
+            $task->setUser($this->getUser());
 
             $em->persist($task);
             $em->flush();
 
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+            $this->addFlash('success', 'La tâche a bien été ajoutée.');
 
             return $this->redirectToRoute('task_list');
         }
@@ -55,18 +49,12 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
-
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
-    public function editAction(Task $task, Request $request, EntityManagerInterface $em, Security $security): Response
+    public function editAction(Task $task, Request $request, EntityManagerInterface $em): Response
     {
-        $user = $security->getUser();
-        if ($task->getUser() !== $user) {
-            $this->addFlash('error', 'Vous ne pouvez pas modifier cette tâche.');
-            return $this->redirectToRoute('task_list');
-        }
+        $this->denyAccessUnlessGranted('TASK_EDIT', $task);
 
         $form = $this->createForm(TaskType::class, $task);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -83,6 +71,19 @@ class TaskController extends AbstractController
         ]);
     }
 
+    #[Route('/tasks/{id}/delete', name: 'task_delete')]
+    public function deleteAction(Task $task, EntityManagerInterface $em): Response
+    {
+        $this->denyAccessUnlessGranted('TASK_DELETE', $task);
+
+        $em->remove($task);
+        $em->flush();
+
+        $this->addFlash('success', 'La tâche a bien été supprimée.');
+
+        return $this->redirectToRoute('task_list');
+    }
+
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
     public function toggleTaskAction(Task $task, EntityManagerInterface $entityManager): Response
@@ -95,20 +96,6 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
-    #[Route('/tasks/{id}/delete', name: 'task_delete')]
-    public function deleteTaskAction(Task $task, EntityManagerInterface $em, Security $security): Response
-    {
-        $user = $security->getUser();
-        if ($task->getUser() !== $user) {
-            $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche.');
-            return $this->redirectToRoute('task_list');
-        }
-
-        $em->remove($task);
-        $em->flush();
-
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
-
-        return $this->redirectToRoute('task_list');
-    }
+    
 }
+
