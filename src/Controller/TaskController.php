@@ -18,9 +18,13 @@ class TaskController extends AbstractController
 {
 
     #[Route('/tasks', name: 'task_list')]
-    public function listAction(EntityManagerInterface $em): Response
+    public function listAction(EntityManagerInterface $em, Security $security): Response
     {
-        $tasks = $em->getRepository(Task::class)->findAll();
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $user = $security->getUser();
+
+        $tasks = $em->getRepository(Task::class)->findBy(['user' => $user]);
 
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
     }
@@ -96,6 +100,25 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
-    
-}
+    #[Route('/tasks/completed', name: 'task_completed_list')]
+    public function completedList(EntityManagerInterface $em, Security $security): Response
+    {
+        // Récupérer l'utilisateur connecté
+        $user = $security->getUser();
 
+        // Vérifier si l'utilisateur est connecté
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour voir cette page.');
+        }
+
+        // Récupérer les tâches terminées de l'utilisateur connecté
+        $completedTasks = $em->getRepository(Task::class)->findBy([
+            'user' => $user,
+            'isDone' => true, // Filtrer les tâches terminées
+        ]);
+
+        return $this->render('task/completed_list.html.twig', [
+            'completedTasks' => $completedTasks,
+        ]);
+    }
+}
