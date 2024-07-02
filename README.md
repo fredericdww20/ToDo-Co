@@ -97,7 +97,7 @@ php bin/phpunit
 ```
 
 
-## diagrammes-uml
+## Diagrammes-uml
 
 1. **Génération des diagrammes**:
    - Utilisez PlantUML pour créer vos diagrammes. Vous pouvez les générer en utilisant les fichiers `.puml` et en les convertissant en images `.png`.
@@ -111,5 +111,4 @@ php bin/phpunit
      plantuml -tpng path_to_puml_file.puml
      ```
 
-En suivant ces instructions, vous devriez être en mesure de configurer et d'exécuter vos tests correctement tout en maintenant une documentation claire et complète pour votre projet sur GitHub. Si vous avez d'autres questions ou des besoins spécifiques, n'hésitez pas à demander.
 
