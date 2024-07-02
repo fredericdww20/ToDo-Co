@@ -87,6 +87,12 @@ php bin/console server:run
 1. Installez PHPUnit si ce n'est pas déjà fait :
 
 ```bash
-    composer require --dev phpunit/phpunit
+composer require --dev phpunit/phpunit
+```
+
+2. Exécutez les tests :
+
+```bash
+php bin/phpunit
 ```
 
