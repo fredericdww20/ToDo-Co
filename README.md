@@ -81,7 +81,7 @@ Démarrez le serveur de développement Symfony :
 ```bash
 php bin/console server:run
 
-## Test
+## Tests
 
 1. Installez PHPUnit si ce n'est pas déjà fait :
 
