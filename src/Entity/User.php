@@ -101,8 +101,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return null;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
+
     }
 
     public function getUserIdentifier(): string

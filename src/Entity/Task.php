@@ -29,7 +29,7 @@ class Task
     private $isDone;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private $user;
 
     public function __construct()

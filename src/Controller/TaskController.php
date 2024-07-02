@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-namespace App\Controller;
-
 use App\Entity\Task;
 use App\Form\TaskType;
 use Doctrine\ORM\EntityManagerInterface;

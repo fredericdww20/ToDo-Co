@@ -54,7 +54,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->router->generate('task_list'));
+        return new RedirectResponse($this->router->generate('homepage'));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
