@@ -80,6 +80,7 @@ Démarrez le serveur de développement Symfony :
 
 ```bash
 php bin/console server:run
+```
 
 ## Tests
 
