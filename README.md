@@ -80,3 +80,12 @@ Démarrez le serveur de développement Symfony :
 
 ```bash
 php bin/console server:run
+
+## Test
+
+1. Installez PHPUnit si ce n'est pas déjà fait :
+
+```bash
+    composer require --dev phpunit/phpunit
+    ```
+
