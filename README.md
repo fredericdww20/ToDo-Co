@@ -97,7 +97,7 @@ php bin/phpunit
 ```
 
 
-##diagrammes-uml
+## diagrammes-uml
 
 1. **Génération des diagrammes**:
    - Utilisez PlantUML pour créer vos diagrammes. Vous pouvez les générer en utilisant les fichiers `.puml` et en les convertissant en images `.png`.
