@@ -96,3 +96,20 @@ composer require --dev phpunit/phpunit
 php bin/phpunit
 ```
 
+
+##diagrammes-uml
+
+1. **Génération des diagrammes**:
+   - Utilisez PlantUML pour créer vos diagrammes. Vous pouvez les générer en utilisant les fichiers `.puml` et en les convertissant en images `.png`.
+
+2. **Inclusion dans le README**:
+   - Assurez-vous que les images des diagrammes sont sauvegardées dans un dossier `docs` à la racine de votre projet.
+
+3. **Exemple de génération de diagrammes avec PlantUML**:
+   - Si vous avez PlantUML installé, vous pouvez générer les diagrammes avec la commande suivante :
+     ```bash
+     plantuml -tpng path_to_puml_file.puml
+     ```
+
+En suivant ces instructions, vous devriez être en mesure de configurer et d'exécuter vos tests correctement tout en maintenant une documentation claire et complète pour votre projet sur GitHub. Si vous avez d'autres questions ou des besoins spécifiques, n'hésitez pas à demander.
+
