@@ -95,7 +95,15 @@ composer require --dev phpunit/phpunit
 ```bash
 php bin/phpunit
 ```
+## Contribuer
 
+Les contributions sont les bienvenues ! Pour contribuer :
+
+Forkez le repository
+Créez votre branche feature (git checkout -b feature/AmazingFeature)
+Commitez vos changements (git commit -m 'Add some AmazingFeature')
+Poussez votre branche (git push origin feature/AmazingFeature)
+Ouvrez une Pull Request
 
 ## Diagrammes-uml
 
@@ -110,5 +118,6 @@ php bin/phpunit
      ```bash
      plantuml -tpng path_to_puml_file.puml
      ```
-
-
+     
+## Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
