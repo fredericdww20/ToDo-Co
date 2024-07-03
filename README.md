@@ -111,14 +111,17 @@ cd ToDo-Co
 git checkout -b feature/nom-de-la-fonctionnalité
 cd ToDo-Co
 ```
-4. **Faites vos modifications : Apportez les modifications nécessaires dans le code**:
+4. **Faites vos modifications : Apportez les modifications nécessaires dans le code**
 
 5. **Commitez vos changements : Enregistrez vos modifications avec un message de commit descriptif**
 ```bash
 git add .
 git commit -m "Description des changements"
 ```
-
+6. **Poussez votre branche : Envoyez vos modifications sur GitHub**
+```bash
+git push origin feature/nom-de-la-fonctionnalité
+```
 
 ## Diagrammes-uml
 
