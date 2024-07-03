@@ -126,23 +126,23 @@ git push origin feature/nom-de-la-fonctionnalité
 
 ## Diagrammes-uml
 
-# Diagramme de Cas d'Utilisation
+- Diagramme de Cas d'Utilisation
 
 ![Diagramme de Cas d'Utilisation](./docs/images/use_case_diagram.png)
 
-# Diagramme de Classe
+- Diagramme de Classe
 
 ![Diagramme de Classe](./docs/images/class_diagram.png)
 
-## Diagramme de Séquence - Créer une Tâche
+- Diagramme de Séquence - Créer une Tâche
 
 ![Diagramme de Séquence - Créer une Tâche](./docs/images/sequence_diagram_create_task.png)
 
-## Diagramme de Séquence - Modifier une Tâche
+- Diagramme de Séquence - Modifier une Tâche
 
 ![Diagramme de Séquence - Modifier une Tâche](./docs/images/sequence_diagram_edit_task.png)
 
-## Diagramme de Séquence - Supprimer une Tâche
+- Diagramme de Séquence - Supprimer une Tâche
 
 ![Diagramme de Séquence - Supprimer une Tâche](./docs/images/sequence_diagram_delete_task.png)
 
