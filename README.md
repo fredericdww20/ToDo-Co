@@ -128,7 +128,7 @@ git push origin feature/nom-de-la-fonctionnalité
 
 - Diagramme de Cas d'Utilisation
 
-![Diagramme de Cas d'Utilisation](./docs/images/Diagramme de Cas d'Utilisation.png)
+![Diagramme de Cas d'Utilisation](./docs/images/Diagramme_de_Cas_d'Utilisation.png)
 
 - Diagramme de Classe
 
