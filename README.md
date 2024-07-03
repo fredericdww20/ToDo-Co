@@ -100,11 +100,25 @@ php bin/phpunit
 Les contributions sont les bienvenues ! Pour contribuer :
 
 1. **Forkez le repository : Cliquez sur le bouton "Fork" en haut de la page du repository**:
+   
 2. **Clonez votre fork : Clonez le repository forké sur votre machine locale**:
 ```bash
 git clone https://github.com/votre-utilisateur/ToDo-Co.git
 cd ToDo-Co
 ```
+3. **Créez une branche pour votre fonctionnalité : Créez une nouvelle branche pour travailler sur votre fonctionnalité ou correction de bug**:
+```bash
+git checkout -b feature/nom-de-la-fonctionnalité
+cd ToDo-Co
+```
+4. **Faites vos modifications : Apportez les modifications nécessaires dans le code**:
+
+5. **Commitez vos changements : Enregistrez vos modifications avec un message de commit descriptif**
+```bash
+git add .
+git commit -m "Description des changements"
+```
+
 
 ## Diagrammes-uml
 
