@@ -126,17 +126,26 @@ git push origin feature/nom-de-la-fonctionnalité
 
 ## Diagrammes-uml
 
-1. **Génération des diagrammes**:
-   - Utilisez PlantUML pour créer vos diagrammes. Vous pouvez les générer en utilisant les fichiers `.puml` et en les convertissant en images `.png`.
+## Diagramme de Cas d'Utilisation
 
-2. **Inclusion dans le README**:
-   - Assurez-vous que les images des diagrammes sont sauvegardées dans un dossier `docs` à la racine de votre projet.
+![Diagramme de Cas d'Utilisation](./docs/images/use_case_diagram.png)
 
-3. **Exemple de génération de diagrammes avec PlantUML**:
-   - Si vous avez PlantUML installé, vous pouvez générer les diagrammes avec la commande suivante :
-     ```bash
-     plantuml -tpng path_to_puml_file.puml
-     ```
+## Diagramme de Classe
+
+![Diagramme de Classe](./docs/images/class_diagram.png)
+
+## Diagramme de Séquence - Créer une Tâche
+
+![Diagramme de Séquence - Créer une Tâche](./docs/images/sequence_diagram_create_task.png)
+
+## Diagramme de Séquence - Modifier une Tâche
+
+![Diagramme de Séquence - Modifier une Tâche](./docs/images/sequence_diagram_edit_task.png)
+
+## Diagramme de Séquence - Supprimer une Tâche
+
+![Diagramme de Séquence - Supprimer une Tâche](./docs/images/sequence_diagram_delete_task.png)
+
      
 ## Licence
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
