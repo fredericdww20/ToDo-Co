@@ -118,11 +118,11 @@ cd ToDo-Co
 git add .
 git commit -m "Description des changements"
 ```
-6. **Poussez votre branche : Envoyez vos modifications sur GitHub**
+6. Poussez votre branche : Envoyez vos modifications sur GitHub:
 ```bash
 git push origin feature/nom-de-la-fonctionnalité
 ```
-7. **Ouvrez une Pull Request : Ouvrez une Pull Request sur GitHub pour que vos modifications soient examinées et fusionnées**
+7. Ouvrez une Pull Request : Ouvrez une Pull Request sur GitHub pour que vos modifications soient examinées et fusionnées:
 
 ## Diagrammes-uml
 
