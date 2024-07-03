@@ -132,7 +132,7 @@ git push origin feature/nom-de-la-fonctionnalité
 
 - Diagramme de Classe
 
-![Diagramme de Classe](./docs/images/class_diagram.png)
+![Diagramme de Classe](./docs/diagramme de classe.png)
 
 - Diagramme de Séquence - Créer une Tâche
 
