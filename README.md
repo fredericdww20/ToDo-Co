@@ -100,11 +100,7 @@ php bin/phpunit
 Les contributions sont les bienvenues ! Pour contribuer :
 
 ```bash
-Forkez le repository
-Créez votre branche feature (git checkout -b feature/AmazingFeature)
-Commitez vos changements (git commit -m 'Add some AmazingFeature')
-Poussez votre branche (git push origin feature/AmazingFeature)
-Ouvrez une Pull Request
+1. **Forkez le repository : Cliquez sur le bouton "Fork" en haut de la page du repository**:
 ```
 
 ## Diagrammes-uml
