@@ -99,8 +99,11 @@ php bin/phpunit
 
 Les contributions sont les bienvenues ! Pour contribuer :
 
-```bash
 1. **Forkez le repository : Cliquez sur le bouton "Fork" en haut de la page du repository**:
+2. **Clonez votre fork : Clonez le repository forké sur votre machine locale**:
+```bash
+git clone https://github.com/votre-utilisateur/ToDo-Co.git
+cd ToDo-Co
 ```
 
 ## Diagrammes-uml
