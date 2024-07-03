@@ -130,10 +130,6 @@ git push origin feature/nom-de-la-fonctionnalité
 
 ![Diagramme de Cas d'Utilisation](./docs/images/Diagramme%20de%20Cas%20d'Utilisation.png)
 
-- Diagramme de Classe
-
-![Diagramme de Classe](./docs/images/diagramme%20de%20classe.png)
-
 - Diagramme de Séquence - Créer une Tâche
 
 ![Diagramme de Séquence - Créer une Tâche](./docs/images/Diagramme%20de%20Séquence%20-%20Créer%20une%20Tâche.png)
@@ -145,6 +141,10 @@ git push origin feature/nom-de-la-fonctionnalité
 - Diagramme de Séquence - Supprimer une Tâche
 
 ![Diagramme de Séquence - Supprimer une Tâche](./docs/images/Diagramme%20de%20Séquence%20-%20Supprimer%20une%20Tâche.png)
+
+- Diagramme de Classe
+
+![Diagramme de Classe](./docs/images/diagramme%20de%20classe.png)
 
      
 ## Licence
