@@ -132,19 +132,19 @@ git push origin feature/nom-de-la-fonctionnalité
 
 - Diagramme de Classe
 
-![Diagramme de Classe](./docs/diagramme de classe.png)
+![Diagramme de Classe](./docs/images/diagramme%20de%20classe.png)
 
 - Diagramme de Séquence - Créer une Tâche
 
-![Diagramme de Séquence - Créer une Tâche](./docs/images/sequence_diagram_create_task.png)
+![Diagramme de Séquence - Créer une Tâche](./docs/images/Diagramme%20de%20Séquence%20-%20Créer%20une%20Tâche.png)
 
 - Diagramme de Séquence - Modifier une Tâche
 
-![Diagramme de Séquence - Modifier une Tâche](./docs/images/sequence_diagram_edit_task.png)
+![Diagramme de Séquence - Modifier une Tâche](./docs/images/Diagramme%20de%20Séquence%20-%20Modifier%20une%20Tâche.png)
 
 - Diagramme de Séquence - Supprimer une Tâche
 
-![Diagramme de Séquence - Supprimer une Tâche](./docs/images/sequence_diagram_delete_task.png)
+![Diagramme de Séquence - Supprimer une Tâche](./docs/images/Diagramme%20de%20Séquence%20-%20Supprimer%20une%20Tâche.png)
 
      
 ## Licence
