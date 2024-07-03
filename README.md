@@ -126,11 +126,11 @@ git push origin feature/nom-de-la-fonctionnalité
 
 ## Diagrammes-uml
 
-## Diagramme de Cas d'Utilisation
+# Diagramme de Cas d'Utilisation
 
 ![Diagramme de Cas d'Utilisation](./docs/images/use_case_diagram.png)
 
-## Diagramme de Classe
+# Diagramme de Classe
 
 ![Diagramme de Classe](./docs/images/class_diagram.png)
 
