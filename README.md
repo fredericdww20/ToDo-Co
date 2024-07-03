@@ -122,6 +122,7 @@ git commit -m "Description des changements"
 ```bash
 git push origin feature/nom-de-la-fonctionnalité
 ```
+7. **Ouvrez une Pull Request : Ouvrez une Pull Request sur GitHub pour que vos modifications soient examinées et fusionnées**
 
 ## Diagrammes-uml
 
