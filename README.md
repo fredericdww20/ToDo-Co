@@ -142,6 +142,18 @@ git push origin feature/nom-de-la-fonctionnalité
 
 ![Diagramme de Séquence - Supprimer une Tâche](./docs/images/Diagramme%20de%20Séquence%20-%20Supprimer%20une%20Tâche.png)
 
+- Diagramme de Séquence - Ajouter un Utilisateur
+
+![Diagramme de Séquence -  Ajouter un Utilisateur](./docs/images/Diagramme%20de%20Séquence%20-%20Ajouter%20un%20Utilisateur.png)
+
+- Diagramme de Séquence - Modifier un Utilisateur
+
+![Diagramme de Séquence -  Modifier un Utilisateur](./docs/images/Diagramme%20de%20Séquence%20-%20Modifier%20un%20Utilisateur.png)
+
+- Diagramme de Séquence - Supprimer une Tâche
+
+![Diagramme de Séquence -  Supprimer une Tâche](./docs/images/Diagramme%20de%20Séquence%20-%20Supprimer%20un%20Utilisateur.png)
+
 - Diagramme de Classe
 
 ![Diagramme de Classe](./docs/images/diagramme%20de%20classe.png)
