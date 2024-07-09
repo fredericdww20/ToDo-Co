@@ -44,12 +44,12 @@ class UserVoter extends Voter
         return in_array('ROLE_ADMIN', $user->getRoles());
     }
 
-    private function canEdit(User $subject, User $user): bool
+    private function canEdit(User $user): bool
     {
         return in_array('ROLE_ADMIN', $user->getRoles());
     }
 
-    private function canDelete(User $subject, User $user): bool
+    private function canDelete(User $user): bool
     {
         return in_array('ROLE_ADMIN', $user->getRoles());
     }
