@@ -23,14 +23,17 @@ abstract class BaseVoter extends Voter
 
         switch ($attribute) {
             case $this->getViewAttribute():
-                return $this->canView($subject, $user);
+                $result = $this->canView($subject, $user);
+                break;
             case $this->getEditAttribute():
-                return $this->canEdit($subject, $user);
+                $result = $this->canEdit($subject, $user);
+                break;
             case $this->getDeleteAttribute():
-                return $this->canDelete($subject, $user);
+                $result = $this->canDelete($subject, $user);
+                break;
         }
 
-        return false;
+        return $result;
     }
 
     abstract protected function supportsClass($subject): bool;
