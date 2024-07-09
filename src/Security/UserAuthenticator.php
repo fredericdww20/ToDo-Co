@@ -39,7 +39,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             throw new CustomUserMessageAuthenticationException('Nom d\'utilisateur non trouvé.');
         }
 
-
+        // Vérifier si l'utilisateur existe
         try {
             $user = $this->userProvider->loadUserByIdentifier($username);
         } catch (AuthenticationException $e) {

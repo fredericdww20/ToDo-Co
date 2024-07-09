@@ -29,7 +29,7 @@ class UserVoter extends Voter
         /** @var User $subject */
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($user);
+                return $this->canView($subject, $user);
             case self::EDIT:
                 return $this->canEdit($subject, $user);
             case self::DELETE:
@@ -39,17 +39,17 @@ class UserVoter extends Voter
         return false;
     }
 
-    private function canView(User $user): bool
+    private function canView(User $subject, User $user): bool
     {
-        return in_array('ROLE_ADMIN', $user->getRoles());
+        return in_array('ROLE_ADMIN', $user->getRoles()) || $user === $subject;
     }
 
-    private function canEdit(User $user): bool
+    private function canEdit(User $subject, User $user): bool
     {
-        return in_array('ROLE_ADMIN', $user->getRoles());
+        return in_array('ROLE_ADMIN', $user->getRoles()) || $user === $subject;
     }
 
-    private function canDelete(User $user): bool
+    private function canDelete(User $subject, User $user): bool
     {
         return in_array('ROLE_ADMIN', $user->getRoles());
     }
