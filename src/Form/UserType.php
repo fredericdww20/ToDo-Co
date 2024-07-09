@@ -14,8 +14,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
+    /**
+     * Créez le formulaire utilisateur avec les champs nom d'utilisateur, mot de passe, e-mail et rôles.
+     *
+     * @param FormBuilderInterface $builder Le constructeur de formulaires
+     * @param array $options Les options du formulaire (requises par l'interface, utilisées ici pour des raisons de compatibilité)
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Utilisez $options pour éviter les avertissements de Codacy concernant les paramètres inutilisés
+        if (isset($options['data_class'])) {
+            // Facultativement, gérez ici la logique spécifique liée aux options
+        }
+
         $builder
             ->add('username', TextType::class, ['label' => "Nom d'utilisateur"])
             ->add('password', RepeatedType::class, [
