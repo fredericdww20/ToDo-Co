@@ -2,58 +2,52 @@
 
 namespace App\Security\Voter;
 
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Task;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class TaskVoter extends Voter
+class TaskVoter extends BaseVoter
 {
     public const VIEW = 'TASK_VIEW';
     public const EDIT = 'TASK_EDIT';
     public const DELETE = 'TASK_DELETE';
 
-    protected function supports(string $attribute, $subject): bool
+    protected function supportsClass($subject): bool
     {
-        return in_array($attribute, [self::VIEW, self::EDIT, self::DELETE]) && $subject instanceof Task;
+        return $subject instanceof Task;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+    protected function getSupportedAttributes(): array
     {
-        $user = $token->getUser();
-
-        if (!$user instanceof UserInterface) {
-            return false;
-        }
-
-        /** @var Task $subject */
-        switch ($attribute) {
-            case self::VIEW:
-                return $this->canView($subject, $user);
-            case self::EDIT:
-                return $this->canEdit($subject, $user);
-            case self::DELETE:
-                return $this->canDelete($subject, $user);
-        }
-
-        return false;
+        return [self::VIEW, self::EDIT, self::DELETE];
     }
 
-    private function canView(Task $task, UserInterface $user): bool
+    protected function getViewAttribute(): string
     {
-        // Any user with ROLE_USER can view their own tasks
+        return self::VIEW;
+    }
+
+    protected function getEditAttribute(): string
+    {
+        return self::EDIT;
+    }
+
+    protected function getDeleteAttribute(): string
+    {
+        return self::DELETE;
+    }
+
+    protected function canView($task, UserInterface $user): bool
+    {
         return in_array('ROLE_USER', $user->getRoles()) && $task->getUser() === $user;
     }
 
-    private function canEdit(Task $task, UserInterface $user): bool
+    protected function canEdit($task, UserInterface $user): bool
     {
-        // Users can edit their own tasks
         return in_array('ROLE_USER', $user->getRoles()) && $task->getUser() === $user;
     }
 
-    private function canDelete(Task $task, UserInterface $user): bool
+    protected function canDelete($task, UserInterface $user): bool
     {
-        // Users can delete their own tasks
         return in_array('ROLE_USER', $user->getRoles()) && $task->getUser() === $user;
     }
 }

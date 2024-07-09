@@ -2,55 +2,52 @@
 
 namespace App\Security\Voter;
 
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserVoter extends Voter
+class UserVoter extends BaseVoter
 {
     public const VIEW = 'USER_VIEW';
     public const EDIT = 'USER_EDIT';
     public const DELETE = 'USER_DELETE';
 
-    protected function supports(string $attribute, $subject): bool
+    protected function supportsClass($subject): bool
     {
-        return in_array($attribute, [self::VIEW, self::EDIT, self::DELETE]) && $subject instanceof User;
+        return $subject instanceof User;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+    protected function getSupportedAttributes(): array
     {
-        $user = $token->getUser();
-
-        if (!$user instanceof UserInterface) {
-            return false;
-        }
-
-        /** @var User $subject */
-        switch ($attribute) {
-            case self::VIEW:
-                return $this->canView($subject, $user);
-            case self::EDIT:
-                return $this->canEdit($subject, $user);
-            case self::DELETE:
-                return $this->canDelete($subject, $user);
-        }
-
-        return false;
+        return [self::VIEW, self::EDIT, self::DELETE];
     }
 
-    private function canView(User $subject, User $user): bool
+    protected function getViewAttribute(): string
     {
-        return in_array('ROLE_ADMIN', $user->getRoles()) || $user === $subject;
+        return self::VIEW;
     }
 
-    private function canEdit(User $subject, User $user): bool
+    protected function getEditAttribute(): string
     {
-        return in_array('ROLE_ADMIN', $user->getRoles()) || $user === $subject;
+        return self::EDIT;
     }
 
-    private function canDelete(User $subject, User $user): bool
+    protected function getDeleteAttribute(): string
     {
-        return in_array('ROLE_ADMIN', $user->getRoles());
+        return self::DELETE;
+    }
+
+    protected function canView($user, UserInterface $currentUser): bool
+    {
+        return in_array('ROLE_ADMIN', $currentUser->getRoles()) || $currentUser === $user;
+    }
+
+    protected function canEdit($user, UserInterface $currentUser): bool
+    {
+        return in_array('ROLE_ADMIN', $currentUser->getRoles()) || $currentUser === $user;
+    }
+
+    protected function canDelete($user, UserInterface $currentUser): bool
+    {
+        return in_array('ROLE_ADMIN', $currentUser->getRoles());
     }
 }
