@@ -6,6 +6,8 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Entity\Task;
 
 class TaskType extends AbstractType
@@ -18,14 +20,15 @@ class TaskType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // Utilisez $options pour éviter les avertissements de Codacy concernant les paramètres inutilisés
-        if (isset($options['data_class'])) {
-            // Facultativement, gérez ici la logique spécifique liée aux options
-        }
-
         $builder
-            ->add('title')
-            ->add('content')
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu',
+                'attr' => ['class' => 'form-control', 'rows' => 5]
+            ])
             // Ajoutez d'autres champs de formulaire si nécessaire
         ;
     }

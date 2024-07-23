@@ -4,21 +4,21 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <h1>Connexion</h1>
+<h1>Connexion</h1>
 
-    {% if error %}
-        <div class="alert alert-danger">Erreur : {{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% else %}
-        <div class="alert alert-info">Veuillez saisir vos identifiants</div>
-    {% endif %}
+{% if error %}
+<div class="alert alert-danger">Erreur : {{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% else %}
+<div class="alert alert-info">Veuillez saisir vos identifiants</div>
+{% endif %}
 
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="username" value="{{ last_username }}" />
+<form action="{{ path('login') }}" method="post">
+    <label for="username">Nom d'utilisateur :</label>
+    <input type="text" id="username" name="username" value="{{ last_username }}" />
 
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" />
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password" />
 
-        <button type="submit">Se connecter</button>
-    </form>
+    <button type="submit">Se connecter</button>
+</form>
 {% endblock %}

@@ -21,32 +21,44 @@ class UserType extends AbstractType
      * @param array $options Les options du formulaire (requises par l'interface, utilisées ici pour des raisons de compatibilité)
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        // Utilisez $options pour éviter les avertissements de Codacy concernant les paramètres inutilisés
-        if (isset($options['data_class'])) {
-            // Facultativement, gérez ici la logique spécifique liée aux options
-        }
-
-        $builder
-            ->add('username', TextType::class, ['label' => "Nom d'utilisateur"])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Les deux mots de passe doivent correspondre.',
-                'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Tapez le mot de passe à nouveau'],
-            ])
-            ->add('email', EmailType::class, ['label' => 'Adresse email'])
-            ->add('roles', ChoiceType::class, [
-                'label' => 'Rôle',
-                'multiple' => true,
-                'expanded' => true,
-                'choices' => [
-                    'Utilisateur' => "ROLE_USER",
-                    'Administrateur' => "ROLE_ADMIN"
-                ],
-            ]);
-    }
+{
+    $builder
+        ->add('username', TextType::class, [
+            'label' => "Nom d'utilisateur",
+            'attr' => ['class' => 'form-control']
+        ])
+        ->add('password', RepeatedType::class, [
+            'type' => PasswordType::class,
+            'invalid_message' => 'Les deux mots de passe doivent correspondre.',
+            'required' => true,
+            'first_options'  => [
+                'label' => 'Mot de passe',
+                'attr' => ['class' => 'form-control']
+            ],
+            'second_options' => [
+                'label' => 'Tapez le mot de passe à nouveau',
+                'attr' => ['class' => 'form-control']
+            ],
+        ])
+        ->add('email', EmailType::class, [
+            'label' => 'Adresse email',
+            'attr' => ['class' => 'form-control']
+        ])
+        ->add('roles', ChoiceType::class, [
+            'label' => 'Rôle',
+            'multiple' => true,
+            'expanded' => true,
+            'choices' => [
+                'Utilisateur' => "ROLE_USER",
+                'Administrateur' => "ROLE_ADMIN"
+            ],
+            'choice_attr' => function($choice, $key, $value) {
+                return ['class' => 'form-check-input'];
+            },
+            'label_attr' => ['class' => 'form-check-label'],
+            'attr' => ['class' => 'form-group mt-3']
+        ]);
+}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

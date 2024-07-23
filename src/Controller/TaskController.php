@@ -14,29 +14,37 @@ use Symfony\Component\Security\Core\Security;
 
 class TaskController extends AbstractController
 {
-
+    // Afficher la liste des tâches
     #[Route('/tasks', name: 'task_list')]
     public function listAction(EntityManagerInterface $em, Security $security): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-
+        // Récupérer l'utilisateur connecté
         $user = $security->getUser();
 
+        // Récupérer les tâches de l'utilisateur connecté
         $tasks = $em->getRepository(Task::class)->findBy(['user' => $user]);
 
+        // Afficher la liste des tâches
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
     }
 
+    // Créer une tâche
     #[Route('/tasks/create', name: 'task_create')]
     public function createAction(Request $request, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        // Créer une nouvelle tâche
         $task = new Task();
+
+        // Créer le formulaire
         $form = $this->createForm(TaskType::class, $task);
 
+        // Gérer la requête
         $form->handleRequest($request);
 
+        // Vérifier si le formulaire a été soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
             $task->setUser($this->getUser());
 
@@ -48,17 +56,23 @@ class TaskController extends AbstractController
             return $this->redirectToRoute('task_list');
         }
 
+        // Afficher le formulaire
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
+    // Modifier une tâche
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
     public function editAction(Task $task, Request $request, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('TASK_EDIT', $task);
 
+        // Créer le formulaire
         $form = $this->createForm(TaskType::class, $task);
+
+        // Gérer la requête
         $form->handleRequest($request);
 
+        // Vérifier si le formulaire a été soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
@@ -67,26 +81,32 @@ class TaskController extends AbstractController
             return $this->redirectToRoute('task_list');
         }
 
+        // Afficher le formulaire de modification
         return $this->render('task/edit.html.twig', [
             'form' => $form->createView(),
             'task' => $task,
         ]);
     }
 
+    // Supprimer une tâche
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
     public function deleteAction(Task $task, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('TASK_DELETE', $task);
 
+        // Supprimer la tâche
         $em->remove($task);
         $em->flush();
 
+        // Afficher un message de confirmation
         $this->addFlash('success', 'La tâche a bien été supprimée.');
 
+        // Rediriger vers la liste des tâches
         return $this->redirectToRoute('task_list');
     }
 
 
+    // Marquer une tâche comme faite ou non faite
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
     public function toggleTaskAction(Task $task, EntityManagerInterface $entityManager): Response
     {
@@ -98,6 +118,7 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
+    // Afficher la liste des tâches terminées
     #[Route('/tasks/completed', name: 'task_completed_list')]
     public function completedList(EntityManagerInterface $em, Security $security): Response
     {
