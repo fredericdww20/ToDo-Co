@@ -59,7 +59,7 @@ ToDo & Co est une application de gestion de tâches quotidienne développée ave
 4. Chargez les fixtures pour créer des utilisateurs et des tâches de test :
 
     ```bash
-    php bin/console doctrine:fixtures:load
+    php bin/console --env=test doctrine:fixtures:load
     ```
 5. Installer les dépendances JavaScript :
    ```bash

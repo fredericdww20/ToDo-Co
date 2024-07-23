@@ -16,7 +16,6 @@ use Symfony\Bundle\SecurityBundle\Security;
 class UserController extends AbstractController
 {
     #[Route('/users/create', name: 'user_create')]
-    
     public function createAction(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
         $this->denyAccessUnlessGranted('USER_VIEW', $this->getUser());

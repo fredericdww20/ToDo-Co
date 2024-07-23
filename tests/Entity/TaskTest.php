@@ -57,5 +57,4 @@ class TaskTest extends TestCase
         $task = new Task();
         $this->assertNull($task->getUser());
     }
-
 }
