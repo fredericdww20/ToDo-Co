@@ -35,18 +35,6 @@ ToDo & Co est une application de gestion de tâches quotidienne développée ave
     composer install
     ```
 
-3. Installez les dépendances JavaScript avec npm :
-
-    ```bash
-    npm install
-    ```
-
-4. Compilez les assets :
-
-    ```bash
-    npm run dev
-    ```
-
 ## Configuration
 
 1. Copiez le fichier `.env` et renommez-le en `.env.local` :
