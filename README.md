@@ -61,6 +61,13 @@ ToDo & Co est une application de gestion de tâches quotidienne développée ave
     ```bash
     php bin/console doctrine:fixtures:load
     ```
+5. Installer les dépendances JavaScript :
+   ```bash
+    npm install
+
+6. Compilez les assets :
+    ```bash
+    npm run dev
 
 ## Utilisation
 
